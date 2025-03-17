@@ -34,7 +34,7 @@ export default function Navbar() {
       router.push('/');
     };
   };
-
+  console.log(user)
   return (
     <header className="border-b w-full">
       <div className="container flex justify-between items-center mx-auto h-16 px-3">
@@ -76,7 +76,9 @@ export default function Navbar() {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href={`${user?.role}/dashboard`}>Dashboard</Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem>My Shop</DropdownMenuItem>
 
                   <DropdownMenuSeparator />

@@ -1,6 +1,6 @@
 'use client'
 
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
 import Logo from "@/app/assets/svgs/Logo";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
