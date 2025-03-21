@@ -6,7 +6,6 @@ import { toast } from "sonner";
 
 
 export const crateCategory = async (data: FormData) => {
-    console.log(data)
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/category`, {
             method: 'POST',
@@ -24,21 +23,9 @@ export const crateCategory = async (data: FormData) => {
 };
 
 
-export const getAllCategory = async () => {
+export const getAllCategories = async () => {
     try {
-        const cookieStore = await cookies();
-        const accessToken = cookieStore.get("accessToken")!.value;
-
-        if (!accessToken) {
-            toast.warning('AccessToken is messing')
-            throw new Error("Access token is missing");
-        }
-
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/category`, {
-            method: 'GET',
-            headers: {
-                Authorization: accessToken
-            },
             next: {
                 tags: ["CATEGORY"],
             }
