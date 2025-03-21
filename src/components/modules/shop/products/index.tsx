@@ -6,8 +6,9 @@ import { IProduct } from '@/types'
 import { ColumnDef } from '@tanstack/react-table'
 import { Edit, Eye, Plus, Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+
 
 export default function ManageProducts({ products }: { products: IProduct[] }) {
     const router = useRouter()
@@ -59,9 +60,9 @@ export default function ManageProducts({ products }: { products: IProduct[] }) {
                 <button title='view' className='text-gray-500 hover:text-blue-500'>
                     <Eye className='w-5 h-5' />
                 </button>
-                <button title='view' className='text-gray-500 hover:text-blue-500'>
+                <Link href={`/user/shop/products/update-product/${row?.original?._id}`} title='view' className='text-gray-500 hover:text-blue-500'>
                     <Edit className='w-5 h-5' />
-                </button>
+                </Link>
                 <button title='view' className='text-gray-500 hover:text-red-500'>
                     <Trash2 className='w-5 h-5' />
                 </button>
