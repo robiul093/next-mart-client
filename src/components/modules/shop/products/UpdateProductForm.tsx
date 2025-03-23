@@ -142,7 +142,7 @@ export default function UpdateProductForm({ product }: { product: IProduct }) {
         <div className="border-2 bg-gray-300 rounded-2xl max-w-[60%] w-full mx-auto p-5 space-y-7">
             <div className="flex items-center space-x-4 ">
                 <Logo />
-                <h2 className='text-xl font-bold'>Add Product</h2>
+                <h2 className='text-xl font-bold'>Update Product</h2>
             </div>
             {/* <Separator /> */}
 
