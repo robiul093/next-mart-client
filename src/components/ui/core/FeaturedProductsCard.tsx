@@ -9,6 +9,7 @@ import {
 import { IProduct } from "@/types"
 import { Heart, Star } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export function ProductCard({ product }: { product: IProduct }) {
     return (
@@ -23,7 +24,9 @@ export function ProductCard({ product }: { product: IProduct }) {
                 />
             </CardHeader>
             <CardContent className="flex-grow">
-                <CardTitle className="">{product?.name.length > 18 ? product?.name.slice(0, 15) + '...' : product?.name}</CardTitle>
+                <Link href={`/products/${product?._id}`}>
+                    <CardTitle className="">{product?.name.length > 18 ? product?.name.slice(0, 15) + '...' : product?.name}</CardTitle>
+                </Link>
                 <div className="flex justify-between items-center mt-2">
                     <div>
                         {
