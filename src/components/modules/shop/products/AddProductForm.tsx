@@ -12,6 +12,7 @@ import { getAllBrands } from '@/services/Brand'
 import { getAllCategories } from '@/services/Category'
 import { addProduct } from '@/services/Product'
 import { IBrand, ICategory } from '@/types'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { FieldValues, FormProvider, SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -21,6 +22,7 @@ export default function AddProductForm() {
     const [imagePreview, setImagePreview] = useState<string[] | []>([]);
     const [categories, setCategories] = useState<ICategory[] | []>([]);
     const [brands, setBrands] = useState<IBrand[] | []>([]);
+    const router = useRouter();
 
     const form = useForm({
         defaultValues: {
@@ -131,9 +133,10 @@ export default function AddProductForm() {
 
         try {
             const res = await addProduct(formData);
-            console.log(res);
+
             if (res.success) {
-                toast.success(res.message)
+                toast.success(res.message);
+                router.push('/user/shop/products')
             } else {
                 toast.error(res.message)
             }

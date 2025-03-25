@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import { NMTable } from '@/components/ui/core/NMTable'
 import { IProduct } from '@/types'
 import { ColumnDef } from '@tanstack/react-table'
@@ -8,12 +9,47 @@ import { Edit, Eye, Plus, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import DiscountModal from './DiscountModal'
 
 
 export default function ManageProducts({ products }: { products: IProduct[] }) {
-    const router = useRouter()
-    console.log(products);
+    const router = useRouter();
+    const [selectProducts, setSelectProducts] = useState<string[] | []>([]);
+    console.log(selectProducts);
+
     const columns: ColumnDef<IProduct>[] = [
+        {
+            id: "select",
+            header: ({ table }) => (
+                <Checkbox
+                    checked={
+                        table.getIsAllPageRowsSelected() ||
+                        (table.getIsSomePageRowsSelected() && "indeterminate")
+                    }
+                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                    aria-label="Select all"
+                />
+            ),
+            cell: ({ row }) => (
+                <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={(value) => {
+                        row.toggleSelected(!!value)
+                        if (value) {
+                            setSelectProducts((pre) => [...pre, row?.original?._id])
+                        }
+                        else {
+                            setSelectProducts(selectProducts.filter(id => id !== row.original._id))
+                        }
+                    }}
+                    aria-label="Select row"
+                />
+            ),
+            enableSorting: false,
+            enableHiding: false,
+
+        },
         {
             accessorKey: "name",
             header: () => <div>Product Name</div>,
@@ -51,7 +87,12 @@ export default function ManageProducts({ products }: { products: IProduct[] }) {
         {
             accessorKey: "price",
             header: () => <div>Price</div>,
-            cell: ({ row }) => <span>{row?.original?.price}</span>
+            cell: ({ row }) => <span>{`${row?.original?.price} $`}</span>
+        },
+        {
+            accessorKey: "offerPrice",
+            header: () => <div>Offer Price</div>,
+            cell: ({ row }) => <span>{row?.original?.offerPrice || "0"}</span>
         },
         {
             accessorKey: 'null',
@@ -73,7 +114,10 @@ export default function ManageProducts({ products }: { products: IProduct[] }) {
         <div>
             <div className='flex justify-between items-center my-5'>
                 <h2>Manage Products</h2>
-                <Button onClick={() => router.push(`/user/shop/products/add-product`)}>Add Product <Plus /></Button>
+                <div className='flex justify-between items-center gap-3'>
+                    <DiscountModal selectProducts={selectProducts} setSelectProducts={setSelectProducts}/>
+                    <Button onClick={() => router.push(`/user/shop/products/add-product`)}>Add Product <Plus /></Button>
+                </div>
             </div>
 
             <div>

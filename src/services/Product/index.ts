@@ -13,7 +13,7 @@ export const addProduct = async (data: FormData) => {
             body: data,
         });
 
-        revalidateTag("updateData")
+        revalidateTag("product")
         return res.json();
     } catch (err: any) {
         return Error(err)
@@ -25,7 +25,7 @@ export const addProduct = async (data: FormData) => {
 export const getAllProducts = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/product`, {
         next: {
-            tags: ["updateData"]
+            tags: ["product"]
         }
     });
 
@@ -37,7 +37,7 @@ export const getSingleProduct = async (productId: string) => {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/product/${productId}`, {
             next: {
-                tags: ["updateData"]
+                tags: ["product"]
             }
         })
 
@@ -59,7 +59,7 @@ export const UpdateProduct = async (data: FormData, id: string) => {
             body: data
         });
 
-        revalidateTag("updateData")
+        revalidateTag("product")
         return res.json()
     } catch (err: any) {
         return Error(err)

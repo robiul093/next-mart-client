@@ -6,7 +6,7 @@ import { ICategory } from '@/types';
 import { useEffect, useState } from 'react'
 
 export default function Category() {
-    const [categories, setCategories] = useState();
+    const [categories, setCategories] = useState<ICategory[]>([]);
 
     useEffect(() => {
         const getCategory = async () => {
@@ -21,7 +21,7 @@ export default function Category() {
             <SectionHeader title='Category' button='View All' />
             <div className='grid md:grid-cols-6 gap-8 mt-8'>
                 {
-                    Array(12).fill(categories?.[0]).map((category: ICategory, idx: number) => <CategoryCard key={idx} category={category} />)
+                    categories?.map((category: ICategory, idx: number) => <CategoryCard key={idx} category={category} />)
                 }
             </div>
         </div>

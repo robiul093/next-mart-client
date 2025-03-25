@@ -2,6 +2,7 @@
 
 import Category from "@/components/modules/home/Category";
 import FeaturedProduct from "@/components/modules/home/FeaturedProduct";
+import FlashSell from "@/components/modules/home/FlashSell";
 import HeroSection from "@/components/modules/home/HeroSection";
 
 export default function HomePage() {
@@ -12,6 +13,7 @@ export default function HomePage() {
       <HeroSection />
       <Category />
       <FeaturedProduct />
+      <FlashSell />
     </div>
   )
 }

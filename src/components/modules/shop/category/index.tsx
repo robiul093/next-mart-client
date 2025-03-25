@@ -1,7 +1,7 @@
 'use client'
 
 import { deletCategory } from '@/services/Category';
-import CreateCategoryModal from './CreateCategoryModat'
+import CreateCategoryModal from './CreateCategoryModal'
 import { NMTable } from '@/components/ui/core/NMTable'
 import { ICategory } from '@/types';
 import { ColumnDef } from '@tanstack/react-table';
@@ -16,7 +16,7 @@ type TCategoriesProps = {
 export default function ManageCategories({ categories }: TCategoriesProps) {
 
     const handleDelete = async (data: ICategory) => {
-        console.log(data);
+        
         try {
             const res = await deletCategory(data._id)
             // console.log(res);
